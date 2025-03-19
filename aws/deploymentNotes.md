@@ -29,3 +29,13 @@ https://us-east-2.console.aws.amazon.com/ecr/private-registry/repositories?regio
 `docker build --platform linux/amd64 -t schulichgpt/dev-prisma -f ./docker/Dockerfile .`
 `docker tag schulichgpt/dev-prisma:latest 253921444959.dkr.ecr.us-east-2.amazonaws.com/schulichgpt/dev-prisma:latest`
 `docker push 253921444959.dkr.ecr.us-east-2.amazonaws.com/schulichgpt/dev-prisma:latest`
+
+
+
+
+# PRISMA DATABASE MIGRATE TO POSTGRES
+## Primary Problem
+- Anything LLM uses a LOCAL sqlite database which is stored in "file:../storage/anythingllm.db". This is set in schema.prisma
+- We need to switch this over to postgres because the amazon RDS database is based on postgres as recommended by Prisma docs (https://www.prisma.io/dataguide/postgresql/setting-up-postgresql-on-rds?query=&page=1)
+- So we need to migrate over the
+

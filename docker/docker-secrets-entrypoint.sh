@@ -24,27 +24,25 @@ if [ -n "$DB_SECRET_ARN" ]; then
   url_encode() {
     local raw="$1"
     local encoded
-    encoded=$(echo "$raw" | sed -e 's/%/%25/g' \
-                                -e 's/ /%20/g' \
-                                -e 's/&/%26/g' \
-                                -e 's/\//%2F/g' \
-                                -e 's/:/%3A/g' \
-                                -e 's/=/%3D/g' \
-                                -e 's/?/%3F/g' \
-                                -e 's/@/%40/g' \
-                                -e 's/\[/%5B/g' \
-                                -e 's/\]/%5D/g' \
-                                -e 's/+/\\%2B/g' \
-                                -e 's/!/\\%21/g'\
-                                -e 's/#/%23/g' \
-                                -e 's/\\/%5C/g' \
-                                -e 's/;/\\%3B/g' \
-                                -e 's/</\\%3C/g' \
-                                -e 's/>/\\%3E/g' \
-                                -e 's/"/\\%22/g')
+
+    encoded=$(printf '%s' "$raw" | sed -e 's/%/%25/g' \
+                                    -e 's/ /%20/g' \
+                                    -e 's/&/%26/g' \
+                                    -e 's/\//%2F/g' \
+                                    -e 's/:/%3A/g' \
+                                    -e 's/=/%3D/g' \
+                                    -e 's/?/%3F/g' \
+                                    -e 's/@/%40/g' \
+                                    -e 's/$$/%5B/g' \
+                                    -e 's/$$/%5D/g' \
+                                    -e 's/\+/%2B/g' \
+                                    -e 's/!/%21/g' \
+                                    -e 's/#/%23/g' \
+                                    -e "s/'/%27/g" \
+                                    -e 's~%7E/g')  # tilde
+
     echo "$encoded"
   }
-
   # URL-encode each component
   ENCODED_DB_USERNAME=$(url_encode "$DB_USERNAME")
   ENCODED_DB_PASSWORD=$(url_encode "$DB_PASSWORD")
