@@ -19,7 +19,11 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
         libgcc1 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libx11-6 libx11-xcb1 libxcb1 \
         libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 \
         libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release \
-        xdg-utils git build-essential ffmpeg && \
+        xdg-utils git build-essential ffmpeg unzip jq && \
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -m).zip" -o "awscliv2.zip" && \
+    unzip awscliv2.zip && \
+    ./aws/install && \
+    rm -rf aws awscliv2.zip && \
     mkdir -p /etc/apt/keyrings && \
     curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
     echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list && \
@@ -39,11 +43,13 @@ RUN groupadd -g "$ARG_GID" anythingllm && \
 # Copy docker helper scripts
 COPY ./docker/docker-entrypoint.sh /usr/local/bin/
 COPY ./docker/docker-healthcheck.sh /usr/local/bin/
-COPY --chown=anythingllm:anythingllm ./docker/.env.example /app/server/.env
+COPY ./docker/docker-secrets-entrypoint.sh /usr/local/bin/
+# COPY --chown=anythingllm:anythingllm ./docker/.env.example /app/server/.env
 
 # Ensure the scripts are executable
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh && \
-    chmod +x /usr/local/bin/docker-healthcheck.sh
+    chmod +x /usr/local/bin/docker-healthcheck.sh && \
+    chmod +x /usr/local/bin/docker-secrets-entrypoint.sh
 
 USER anythingllm
 WORKDIR /app
@@ -79,7 +85,11 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
         libgcc1 libglib2.0-0 libgtk-3-0 libnspr4 libpango-1.0-0 libx11-6 libx11-xcb1 libxcb1 \
         libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 \
         libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release \
-        xdg-utils git build-essential ffmpeg && \
+        xdg-utils git build-essential ffmpeg unzip jq && \
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-$(uname -m).zip" -o "awscliv2.zip" && \
+    unzip awscliv2.zip && \
+    ./aws/install && \
+    rm -rf aws awscliv2.zip && \
     mkdir -p /etc/apt/keyrings && \
     curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
     echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list && \
@@ -99,11 +109,14 @@ RUN groupadd -g "$ARG_GID" anythingllm && \
 # Copy docker helper scripts
 COPY ./docker/docker-entrypoint.sh /usr/local/bin/
 COPY ./docker/docker-healthcheck.sh /usr/local/bin/
-COPY --chown=anythingllm:anythingllm ./docker/.env.example /app/server/.env
+COPY ./docker/docker-secrets-entrypoint.sh /usr/local/bin/
+# COPY --chown=anythingllm:anythingllm ./docker/.env.example /app/server/.env
 
 # Ensure the scripts are executable
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh && \
-    chmod +x /usr/local/bin/docker-healthcheck.sh
+    chmod +x /usr/local/bin/docker-healthcheck.sh && \
+    chmod +x /usr/local/bin/docker-secrets-entrypoint.sh
+
 
 #############################################
 # COMMON BUILD FLOW FOR ALL ARCHS
@@ -154,11 +167,6 @@ RUN chown -R anythingllm:anythingllm /app/server && \
     chown -R anythingllm:anythingllm /app/collector
 USER anythingllm
 
-# No longer needed? (deprecated)
-# WORKDIR /app/server
-# RUN npx prisma generate --schema=./prisma/schema.prisma && \
-#     npx prisma migrate deploy --schema=./prisma/schema.prisma
-# WORKDIR /app
 
 # Setup the environment
 ENV NODE_ENV=production
@@ -170,4 +178,4 @@ HEALTHCHECK --interval=1m --timeout=10s --start-period=1m \
 
 # Run the server
 # CMD ["sh", "-c", "tail -f /dev/null"] # For development: keep container open
-ENTRYPOINT ["/bin/bash", "/usr/local/bin/docker-entrypoint.sh"]
+ENTRYPOINT ["/bin/bash", "/usr/local/bin/docker-secrets-entrypoint.sh"]
