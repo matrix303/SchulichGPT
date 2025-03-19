@@ -288,12 +288,12 @@ export default function MultiUserAuth() {
                 <h3 className="text-md md:text-2xl font-bold text-white text-center white-space-nowrap hidden md:block">
                   {t("login.multi-user.welcome")}
                 </h3>
-                <p className="text-4xl md:text-2xl font-bold bg-gradient-to-r from-[#75D6FF] via-[#FFFFFF] light:via-[#75D6FF] to-[#FFFFFF] light:to-[#75D6FF] bg-clip-text text-transparent">
-                  {customAppName || "AnythingLLM"}
+                <p className="text-4xl md:text-2xl font-bold bg-gradient-to-r from-[#502486] via-[#FFFFFF] light:via-[#502486] to-[#FFFFFF] light:to-[#502486] bg-clip-text text-transparent">
+                  {customAppName || "SchulichGPT"}
                 </p>
               </div>
               <p className="text-sm text-theme-text-secondary text-center">
-                {t("login.sign-in.start")} {customAppName || "AnythingLLM"}{" "}
+                {t("login.sign-in.start")} {customAppName || "SchulichGPT"}{" "}
                 {t("login.sign-in.end")}
               </p>
             </div>

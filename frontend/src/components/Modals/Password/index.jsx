@@ -8,7 +8,8 @@ import {
   AUTH_TIMESTAMP,
 } from "../../../utils/constants";
 import useLogo from "../../../hooks/useLogo";
-import illustration from "@/media/illustrations/login-illustration.svg";
+// import illustration from "@/media/illustrations/login-illustration.svg";
+import illustration from "@/media/illustrations/login-illustration-schulich-stacked.jpeg";
 
 export default function PasswordModal({ mode = "single" }) {
   const { loginLogo } = useLogo();
@@ -18,7 +19,7 @@ export default function PasswordModal({ mode = "single" }) {
         style={{
           background: `
     radial-gradient(circle at center, transparent 40%, black 100%),
-    linear-gradient(180deg, #85F8FF 0%, #65A6F2 100%)
+    linear-gradient(180deg,rgb(212, 133, 255) 0%,rgb(72, 0, 69) 100%)
   `,
           width: "575px",
           filter: "blur(150px)",
