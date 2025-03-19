@@ -21,6 +21,7 @@ if [ -n "$DB_SECRET_ARN" ]; then
   # Construct DATABASE_URL for Prisma
   # export DATABASE_URL="postgresql://${DB_USERNAME}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}"
   # Function to perform URL encoding based on the specified rules
+
   url_encode() {
     local raw="$1"
     local encoded
@@ -33,13 +34,15 @@ if [ -n "$DB_SECRET_ARN" ]; then
                                     -e 's/=/%3D/g' \
                                     -e 's/?/%3F/g' \
                                     -e 's/@/%40/g' \
-                                    -e 's/$$/%5B/g' \
-                                    -e 's/$$/%5D/g' \
+                                    -e 's/\[/%5B/g' \
+                                    -e 's/\]/%5D/g' \
                                     -e 's/\+/%2B/g' \
                                     -e 's/!/%21/g' \
                                     -e 's/#/%23/g' \
                                     -e "s/'/%27/g" \
-                                    -e 's~%7E/g')  # tilde
+                                    -e 's/~/\%7E/g' \
+                                    -e 's/</\%3C/g' \
+                                    -e 's/>/\%3E/g')
 
     echo "$encoded"
   }
@@ -54,7 +57,7 @@ if [ -n "$DB_SECRET_ARN" ]; then
   export DATABASE_URL="postgresql://${ENCODED_DB_USERNAME}:${ENCODED_DB_PASSWORD}@${ENCODED_DB_HOST}:${ENCODED_DB_PORT}/${ENCODED_DB_NAME}"
   echo "=================================================================="
   echo "DATABASE_URL constructed from AWS Secrets Manager:"
-  echo "${DATABASE_URL}" | sed 's/:/\\\*\\\*\\\*@/2'  # Hide password in logs
+  echo "${DATABASE_URL}" #| sed 's/:/\\\*\\\*\\\*@/2'  # Hide password in logs
   echo "=================================================================="
 
   # Add to .env file for Prisma to find it
@@ -66,13 +69,13 @@ else
 fi
 
 # Print environment info for debugging
-echo "Current DATABASE_URL being used:"
-grep DATABASE_URL /app/server/.env 2>/dev/null || echo "DATABASE_URL not found in .env file"
-env | grep -i postgres || echo "No POSTGRES environment variables found"
+# echo "Current DATABASE_URL being used:"
+# grep DATABASE_URL /app/server/.env 2>/dev/null || echo "DATABASE_URL not found in .env file"
+# env | grep -i postgres || echo "No POSTGRES environment variables found"
 
 
-echo "Logging all variables from /app/server/.env:"
-cat /app/server/.env
+# echo "Logging all variables from /app/server/.env:"
+# cat /app/server/.env
 echo "=================================================================="
 echo "Environment variables set for database connection."
 echo "=================================================================="
