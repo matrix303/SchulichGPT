@@ -57,7 +57,7 @@ if [ -n "$DB_SECRET_ARN" ]; then
   export DATABASE_URL="postgresql://${ENCODED_DB_USERNAME}:${ENCODED_DB_PASSWORD}@${ENCODED_DB_HOST}:${ENCODED_DB_PORT}/${ENCODED_DB_NAME}"
   echo "=================================================================="
   echo "DATABASE_URL constructed from AWS Secrets Manager:"
-  echo "${DATABASE_URL}" #| sed 's/:/\\\*\\\*\\\*@/2'  # Hide password in logs
+  # echo "${DATABASE_URL}" #| sed 's/:/\\\*\\\*\\\*@/2'  # Hide password in logs
   echo "=================================================================="
 
   # Add to .env file for Prisma to find it
