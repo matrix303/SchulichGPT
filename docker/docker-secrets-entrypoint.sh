@@ -35,7 +35,7 @@ if [ -n "$DB_SECRET_ARN" ]; then
                                 -e 's/\[/%5B/g' \
                                 -e 's/\]/%5D/g' \
                                 -e 's/+/\\%2B/g' \
-                                -e 's/!/\\%21/g' \)
+                                -e 's/!/\\%21/g')
     echo "$encoded"
   }
 
