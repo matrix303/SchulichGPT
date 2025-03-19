@@ -69,15 +69,15 @@ const LiveDocumentSyncManage = lazy(
 );
 // const AgentBuilder = lazy(() => import("@/pages/Admin/AgentBuilder"));
 
-const CommunityHubTrending = lazy(
-  () => import("@/pages/GeneralSettings/CommunityHub/Trending")
-);
-const CommunityHubAuthentication = lazy(
-  () => import("@/pages/GeneralSettings/CommunityHub/Authentication")
-);
-const CommunityHubImportItem = lazy(
-  () => import("@/pages/GeneralSettings/CommunityHub/ImportItem")
-);
+// const CommunityHubTrending = lazy(
+//   () => import("@/pages/GeneralSettings/CommunityHub/Trending")
+// );
+// const CommunityHubAuthentication = lazy(
+//   () => import("@/pages/GeneralSettings/CommunityHub/Authentication")
+// );
+// const CommunityHubImportItem = lazy(
+//   () => import("@/pages/GeneralSettings/CommunityHub/ImportItem")
+// );
 
 export default function App() {
   return (
@@ -231,7 +231,7 @@ export default function App() {
                     element={<AdminRoute Component={LiveDocumentSyncManage} />}
                   />
 
-                  <Route
+                  {/* <Route
                     path="/settings/community-hub/trending"
                     element={<AdminRoute Component={CommunityHubTrending} />}
                   />
@@ -244,7 +244,7 @@ export default function App() {
                   <Route
                     path="/settings/community-hub/import-item"
                     element={<AdminRoute Component={CommunityHubImportItem} />}
-                  />
+                  /> */}
                 </Routes>
                 <ToastContainer />
               </I18nextProvider>
