@@ -25,7 +25,7 @@ const AdminUsers = lazy(() => import("@/pages/Admin/Users"));
 const AdminInvites = lazy(() => import("@/pages/Admin/Invitations"));
 const AdminWorkspaces = lazy(() => import("@/pages/Admin/Workspaces"));
 const AdminLogs = lazy(() => import("@/pages/Admin/Logging"));
-const AdminAgents = lazy(() => import("@/pages/Admin/Agents"));
+// const AdminAgents = lazy(() => import("@/pages/Admin/Agents"));
 const GeneralChats = lazy(() => import("@/pages/GeneralSettings/Chats"));
 const GeneralAppearance = lazy(
   () => import("@/pages/GeneralSettings/Appearance")
@@ -67,17 +67,17 @@ const ExperimentalFeatures = lazy(
 const LiveDocumentSyncManage = lazy(
   () => import("@/pages/Admin/ExperimentalFeatures/Features/LiveSync/manage")
 );
-const AgentBuilder = lazy(() => import("@/pages/Admin/AgentBuilder"));
+// const AgentBuilder = lazy(() => import("@/pages/Admin/AgentBuilder"));
 
-const CommunityHubTrending = lazy(
-  () => import("@/pages/GeneralSettings/CommunityHub/Trending")
-);
-const CommunityHubAuthentication = lazy(
-  () => import("@/pages/GeneralSettings/CommunityHub/Authentication")
-);
-const CommunityHubImportItem = lazy(
-  () => import("@/pages/GeneralSettings/CommunityHub/ImportItem")
-);
+// const CommunityHubTrending = lazy(
+//   () => import("@/pages/GeneralSettings/CommunityHub/Trending")
+// );
+// const CommunityHubAuthentication = lazy(
+//   () => import("@/pages/GeneralSettings/CommunityHub/Authentication")
+// );
+// const CommunityHubImportItem = lazy(
+//   () => import("@/pages/GeneralSettings/CommunityHub/ImportItem")
+// );
 
 export default function App() {
   return (
@@ -140,11 +140,11 @@ export default function App() {
                     path="/settings/vector-database"
                     element={<AdminRoute Component={GeneralVectorDatabase} />}
                   />
-                  <Route
+                  {/* <Route
                     path="/settings/agents"
                     element={<AdminRoute Component={AdminAgents} />}
-                  />
-                  <Route
+                  /> */}
+                  {/* <Route
                     path="/settings/agents/builder"
                     element={
                       <AdminRoute
@@ -161,7 +161,7 @@ export default function App() {
                         hideUserMenu={true}
                       />
                     }
-                  />
+                  /> */}
                   <Route
                     path="/settings/event-logs"
                     element={<AdminRoute Component={AdminLogs} />}
@@ -231,7 +231,7 @@ export default function App() {
                     element={<AdminRoute Component={LiveDocumentSyncManage} />}
                   />
 
-                  <Route
+                  {/* <Route
                     path="/settings/community-hub/trending"
                     element={<AdminRoute Component={CommunityHubTrending} />}
                   />
@@ -244,7 +244,7 @@ export default function App() {
                   <Route
                     path="/settings/community-hub/import-item"
                     element={<AdminRoute Component={CommunityHubImportItem} />}
-                  />
+                  /> */}
                 </Routes>
                 <ToastContainer />
               </I18nextProvider>

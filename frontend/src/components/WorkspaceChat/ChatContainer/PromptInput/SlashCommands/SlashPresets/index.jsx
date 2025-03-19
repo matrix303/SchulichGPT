@@ -9,7 +9,7 @@ import showToast from "@/utils/toast";
 
 export const CMD_REGEX = new RegExp(/[^a-zA-Z0-9_-]/g);
 export default function SlashPresets({ setShowing, sendCommand }) {
-  const isActiveAgentSession = useIsAgentSessionActive();
+  // const isActiveAgentSession = useIsAgentSessionActive();
   const {
     isOpen: isAddModalOpen,
     openModal: openAddModal,
@@ -26,7 +26,7 @@ export default function SlashPresets({ setShowing, sendCommand }) {
   useEffect(() => {
     fetchPresets();
   }, []);
-  if (isActiveAgentSession) return null;
+  // if (isActiveAgentSession) return null;
 
   const fetchPresets = async () => {
     const presets = await System.getSlashCommandPresets();
