@@ -6,10 +6,10 @@ import SlashCommandsButton, {
 import debounce from "lodash.debounce";
 import { PaperPlaneRight } from "@phosphor-icons/react";
 import StopGenerationButton from "./StopGenerationButton";
-import AvailableAgentsButton, {
-  AvailableAgents,
-  useAvailableAgents,
-} from "./AgentMenu";
+// import AvailableAgentsButton, {
+//   AvailableAgents,
+//   useAvailableAgents,
+// } from "./AgentMenu";
 import TextSizeButton from "./TextSizeMenu";
 import SpeechToText from "./SpeechToText";
 import { Tooltip } from "react-tooltip";
@@ -31,7 +31,7 @@ export default function PromptInput({
 }) {
   const { t } = useTranslation();
   const [promptInput, setPromptInput] = useState("");
-  const { showAgents, setShowAgents } = useAvailableAgents();
+  // const { showAgents, setShowAgents } = useAvailableAgents();
   const { showSlashCommand, setShowSlashCommand } = useSlashCommands();
   const formRef = useRef(null);
   const textareaRef = useRef(null);
@@ -97,8 +97,8 @@ export default function PromptInput({
 
   function checkForAt(e) {
     const input = e.target.value;
-    if (input === "@") return setShowAgents(true);
-    if (showAgents) return setShowAgents(false);
+    // if (input === "@") return setShowAgents(true);
+    // if (showAgents) return setShowAgents(false);
   }
   const watchForAt = debounce(checkForAt, 300);
 
@@ -238,12 +238,12 @@ export default function PromptInput({
         setShowing={setShowSlashCommand}
         sendCommand={sendCommand}
       />
-      <AvailableAgents
+      {/* <AvailableAgents
         showing={showAgents}
         setShowing={setShowAgents}
         sendCommand={sendCommand}
         promptRef={textareaRef}
-      />
+      /> */}
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-y-1 rounded-t-lg md:w-3/4 w-full mx-auto max-w-xl items-center"
@@ -305,10 +305,10 @@ export default function PromptInput({
                   showing={showSlashCommand}
                   setShowSlashCommand={setShowSlashCommand}
                 />
-                <AvailableAgentsButton
+                {/* <AvailableAgentsButton
                   showing={showAgents}
                   setShowAgents={setShowAgents}
-                />
+                /> */}
                 <TextSizeButton />
               </div>
               <div className="flex gap-x-2">

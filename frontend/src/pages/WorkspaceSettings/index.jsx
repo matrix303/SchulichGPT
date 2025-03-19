@@ -20,7 +20,7 @@ import GeneralAppearance from "./GeneralAppearance";
 import ChatSettings from "./ChatSettings";
 import VectorDatabase from "./VectorDatabase";
 import Members from "./Members";
-import WorkspaceAgentConfiguration from "./AgentConfig";
+// import WorkspaceAgentConfiguration from "./AgentConfig";
 import useUser from "@/hooks/useUser";
 import { useTranslation } from "react-i18next";
 import System from "@/models/system";
@@ -30,7 +30,7 @@ const TABS = {
   "chat-settings": ChatSettings,
   "vector-database": VectorDatabase,
   members: Members,
-  "agent-config": WorkspaceAgentConfiguration,
+  // "agent-config": WorkspaceAgentConfiguration,
 };
 
 export default function WorkspaceSettings() {

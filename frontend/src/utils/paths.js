@@ -65,9 +65,9 @@ export default {
       members: (slug) => {
         return `/workspace/${slug}/settings/members`;
       },
-      agentConfig: (slug) => {
-        return `/workspace/${slug}/settings/agent-config`;
-      },
+      // agentConfig: (slug) => {
+      //   return `/workspace/${slug}/settings/agent-config`;
+      // },
     },
     thread: (wsSlug, threadSlug) => {
       return `/workspace/${wsSlug}/t/${threadSlug}`;
@@ -114,9 +114,9 @@ export default {
     appearance: () => {
       return "/settings/appearance";
     },
-    agentSkills: () => {
-      return "/settings/agents";
-    },
+    // agentSkills: () => {
+    //   return "/settings/agents";
+    // },
     apiKeys: () => {
       return "/settings/api-keys";
     },
@@ -139,14 +139,14 @@ export default {
       return `/settings/beta-features`;
     },
   },
-  agents: {
-    builder: () => {
-      return `/settings/agents/builder`;
-    },
-    editAgent: (uuid) => {
-      return `/settings/agents/builder/${uuid}`;
-    },
-  },
+  // agents: {
+  //   builder: () => {
+  //     return `/settings/agents/builder`;
+  //   },
+  //   editAgent: (uuid) => {
+  //     return `/settings/agents/builder/${uuid}`;
+  //   },
+  // },
   communityHub: {
     website: () => {
       return import.meta.env.DEV

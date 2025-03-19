@@ -749,7 +749,7 @@ const TRANSLATIONS = {
     send_message: "Send a message",
     attach_file: "Attach a file to this chat",
     slash: "View all available slash commands for chatting.",
-    agents: "View all available agents you can use for chatting.",
+    // agents: "View all available agents you can use for chatting.",
     text_size: "Change text size.",
     microphone: "Speak your prompt.",
     send: "Send prompt message to workspace",
