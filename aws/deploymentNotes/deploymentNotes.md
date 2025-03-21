@@ -89,3 +89,14 @@ https://us-east-2.console.aws.amazon.com/ecr/private-registry/repositories?regio
 ### setup for the route tables
 - add this to the two APP private subnets and the two DATA private subnets (0.0.0.0 linked to NAT)
 ![alt text](image.png)
+
+
+# Database
+- mutliAZ - in RDS settings, modify availability and duration:
+  - CURRENTLY SET TO `Do not create a standby instance` to save $0.60 a day
+  - can change to `Create a standby instance (recommended for production usage)` for production depending on costs
+
+
+# AWS Cost savings
+- deleted NAT gateway for private resources (not needed), cost $1 per day for no use (see NAT Tables)
+- RDS - multiAZ usage = $0.60 per day.. not needed rn
