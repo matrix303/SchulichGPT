@@ -76,3 +76,16 @@ https://us-east-2.console.aws.amazon.com/ecr/private-registry/repositories?regio
     5. should be done!
     Note - you may need to add the EC2 instance security group to the db (should just happened if you connect compute resources)
 
+# AWS NAT Tables
+- these are used to allow resources on private subnets to then access the internet.
+- As of right now, we DO NOT need that capability for our database (RDS) or App to connect to the internet
+- It is currently costing ~1usd a day to just keep it up when its not being used. SO i deleted it
+- This is a log of the current setup so that to recreate it, this is how it is done:
+
+### setup for VPC and subnet
+- the subnet is public-2a
+- vpc = sgpt
+
+### setup for the route tables
+- add this to the two APP private subnets and the two DATA private subnets (0.0.0.0 linked to NAT)
+![alt text](image.png)
