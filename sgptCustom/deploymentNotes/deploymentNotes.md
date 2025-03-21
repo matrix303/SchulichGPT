@@ -100,3 +100,19 @@ https://us-east-2.console.aws.amazon.com/ecr/private-registry/repositories?regio
 # AWS Cost savings
 - deleted NAT gateway for private resources (not needed), cost $1 per day for no use (see NAT Tables)
 - RDS - multiAZ usage = $0.60 per day.. not needed rn
+
+
+
+# LanceDB
+- This is based on https://lancedb.github.io/lancedb/guides/storage/#general-configuration
+- Based on this, it is easy to link to S3 buckets by just providing a s3 bucket links
+
+Current Plan
+- build and develop lanceDB databases locally and then upload the `abc.lance` bucket from `server/storage/lancedb` to S3 bucket.
+
+
+TODO:
+- [X] Test connecting s3 bucket locally by changing the url in `server/utils/vectorDbProviders/lance/index.js` to the S3 bucket to see if that works.
+  - This seems to work well locally+S3. It is able to retrieve vector chunks and cite them, seems to be able to give to OpenAI gpt4o and works well that way
+  - Creating a new workspace locally, adding documents, moving them to the workspace, and embedding them --> New .lance folder created on the bucket online! (note, vector cache created locally in a folder `server/storage/vector-cache` but thats fine)
+- [ ] Then, Test connecting the deployment docker sgpt with s3 bucket by building image and reuploading

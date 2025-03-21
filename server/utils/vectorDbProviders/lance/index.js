@@ -13,9 +13,10 @@ const { NativeEmbeddingReranker } = require("../../EmbeddingRerankers/native");
  */
 
 const LanceDb = {
-  uri: `${
-    !!process.env.STORAGE_DIR ? `${process.env.STORAGE_DIR}/` : "./storage/"
-  }lancedb`,
+  // uri: `${
+  //   !!process.env.STORAGE_DIR ? `${process.env.STORAGE_DIR}/` : "./storage/"
+  // }lancedb`,
+  uri: process.env.LANCEDB_URI,
   name: "LanceDb",
 
   /** @returns {Promise<{client: LanceClient}>} */
